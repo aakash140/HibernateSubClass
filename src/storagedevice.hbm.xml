@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+          "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+          
+ <hibernate-mapping>
+ <class name="com.hibernate.storage.StorageDevice" table="storage_device_sub">
+ <id name="id">
+ <generator class="increment">
+ </generator>
+ </id>
+ 
+ 
+ <property name="capacity"></property>
+ <property name="transferRate"></property>
+ <property name="fileSystem"></property>
+ 
+ <joined-subclass name="com.hibernate.storage.USBFlashDrive" table="usb_drive_sub">
+ <key column="device_id"></key>
+ <property name="version"></property>
+ <property name="operatingSystem"></property>
+ </joined-subclass>
+ 
+ <joined-subclass name="com.hibernate.storage.CompactDisk" table="compact_disk_sub">
+ <key column="device_id"></key>
+ <property name="is_reWritable" type="yes_no"></property>
+ <property name="multimediaType"></property>
+ </joined-subclass>
+ 
+ </class>
+ </hibernate-mapping>
